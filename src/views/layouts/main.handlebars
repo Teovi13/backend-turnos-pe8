@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} · Turnos y Reservas</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="/views/services">Turnos <span>y</span> Reservas</a>
+      <nav class="nav">
+        <a href="/views/services" class="nav__link {{#if isServices}}nav__link--active{{/if}}">Servicios</a>
+        <a href="/views/availability" class="nav__link {{#if isAvailability}}nav__link--active{{/if}}">Disponibilidad</a>
+      </nav>
+      <span id="socket-status" class="status status--offline">Sin conexión</span>
+    </div>
+  </header>
+
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/socket.js"></script>
+</body>
+</html>

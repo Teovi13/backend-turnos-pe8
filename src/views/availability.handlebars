@@ -1,0 +1,51 @@
+<section class="page-header">
+  <h1>Disponibilidad</h1>
+  <p class="muted">Servicios que se pueden reservar ahora, agrupados por categoría. Se actualiza solo cuando se crea, modifica o elimina un servicio.</p>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <span class="stat__value" id="total-available">{{totalAvailable}}</span>
+    <span class="stat__label">disponibles para reservar</span>
+  </div>
+  <div class="stat">
+    <span class="stat__value" id="total-services">{{totalServices}}</span>
+    <span class="stat__label">servicios en total</span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Disponibles</h2>
+  <div id="availability-categories" class="categories">
+    {{#each categories}}
+      <article class="category">
+        <h3 class="category__title">{{category}} <span class="muted">({{services.length}})</span></h3>
+        <ul class="service-list">
+          {{#each services}}
+            <li class="service-item">
+              <div>
+                <span class="strong">{{name}}</span>
+                <span class="muted">{{description}}</span>
+              </div>
+              <div class="service-item__meta">
+                <span>{{duration}} min</span>
+                <span class="strong">{{formatPrice price}}</span>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </article>
+    {{/each}}
+  </div>
+  <p id="available-empty" class="empty" {{#if hasAvailable}}hidden{{/if}}>No hay servicios disponibles en este momento.</p>
+</section>
+
+<section class="card">
+  <h2>No disponibles</h2>
+  <ul id="unavailable-list" class="chips">
+    {{#each unavailable}}
+      <li class="chip">{{name}} <span class="muted">· {{category}}</span></li>
+    {{/each}}
+  </ul>
+  <p id="unavailable-empty" class="empty" {{#if hasUnavailable}}hidden{{/if}}>Todos los servicios están disponibles.</p>
+</section>

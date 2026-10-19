@@ -1,0 +1,87 @@
+<section class="page-header">
+  <h1>Servicios</h1>
+  <p class="muted">Listado en tiempo real. Los cambios hechos desde esta vista, desde otra pestaña o desde la API se reflejan sin recargar.</p>
+</section>
+
+<section class="card">
+  <h2>Nuevo servicio</h2>
+  <form id="service-form" class="form" novalidate>
+    <label class="field">
+      <span>Nombre</span>
+      <input name="name" type="text" required>
+    </label>
+    <label class="field">
+      <span>Categoría</span>
+      <input name="category" type="text" required>
+    </label>
+    <label class="field field--wide">
+      <span>Descripción</span>
+      <input name="description" type="text" required>
+    </label>
+    <label class="field">
+      <span>Duración (min)</span>
+      <input name="duration" type="number" min="1" step="1" required>
+    </label>
+    <label class="field">
+      <span>Precio</span>
+      <input name="price" type="number" min="0" step="1" required>
+    </label>
+    <label class="field field--check">
+      <input name="available" type="checkbox" checked>
+      <span>Disponible</span>
+    </label>
+    <div class="form__actions">
+      <button type="submit" class="btn btn--primary">Crear servicio</button>
+      <p id="form-message" class="form__message" aria-live="polite"></p>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card__header">
+    <h2>Listado</h2>
+    <span class="muted"><strong id="services-count">{{services.length}}</strong> servicios</span>
+  </div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Duración</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Disponibilidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="services-body">
+        {{#each services}}
+          <tr data-id="{{id}}">
+            <td data-label="Nombre" class="strong">{{name}}</td>
+            <td data-label="Descripción">{{description}}</td>
+            <td data-label="Duración">{{duration}} min</td>
+            <td data-label="Precio">{{formatPrice price}}</td>
+            <td data-label="Categoría"><span class="tag">{{category}}</span></td>
+            <td data-label="Disponibilidad">
+              {{#if available}}
+                <span class="badge badge--on">Disponible</span>
+              {{else}}
+                <span class="badge badge--off">No disponible</span>
+              {{/if}}
+            </td>
+            <td data-label="Acciones">
+              <div class="actions">
+                <button type="button" class="btn btn--small" data-action="toggle" data-available="{{available}}">
+                  {{#if available}}Desactivar{{else}}Activar{{/if}}
+                </button>
+                <button type="button" class="btn btn--small btn--danger" data-action="delete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <p id="services-empty" class="empty" {{#if hasServices}}hidden{{/if}}>Todavía no hay servicios cargados.</p>
+</section>
